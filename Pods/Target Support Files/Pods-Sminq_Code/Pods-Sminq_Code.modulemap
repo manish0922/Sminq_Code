@@ -1,0 +1,6 @@
+framework module Pods_Sminq_Code {
+  umbrella header "Pods-Sminq_Code-umbrella.h"
+
+  export *
+  module * { export * }
+}
