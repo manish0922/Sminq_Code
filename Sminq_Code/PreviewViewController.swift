@@ -14,38 +14,15 @@ class PreviewViewController: UIViewController,UICollectionViewDelegate,UICollect
     var uploadedImageUrlArray : [Photo?] = []
     @IBOutlet var collectionView : UICollectionView!
     @IBOutlet var activityIndicator : UIActivityIndicatorView!
-
-    var imageArray : [UIImage] = []
+    
     var cloudinary = CLDCloudinary(configuration: CLDConfiguration(cloudName: "your_cloud_name", apiKey:"api_key", secure: true))
    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.activityIndicator.startAnimating()
-        //downloadImagesFromCloudinary()
         self.collectionView.reloadData()
     }
     
-   /* func downloadImagesFromCloudinary(){
-        let downloader = cloudinary.createDownloader()
-        for str in uploadedImageUrlArray{
-            downloader.fetchImage(str) {[unowned self] (image, error) in
-                if let error = error {
-                    print("Error downloading image : \(error)")
-                }else{
-                    self.imageArray.append(image!)
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
-                }
-            }
-            
-        }
-    }*/
     
      func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
@@ -65,18 +42,12 @@ class PreviewViewController: UIViewController,UICollectionViewDelegate,UICollect
                 if let error = error {
                     print("Error downloading image : \(error)")
                 }else{
-                    self.imageArray.append(image!)
                     DispatchQueue.main.async {
-                       // self.collectionView.reloadData()
-                       // cell.imageViewCell.cldSetImage
                         self.activityIndicator.isHidden = true
-                       // cell.imageViewCell.image = self.imageArray[indexPath.row]
                         cell.imageViewCell.image = image
                 }
                 }
         }
-        //cell.imageViewCell.image = imageArray[indexPath.row]
-       
         return cell
     }
     
